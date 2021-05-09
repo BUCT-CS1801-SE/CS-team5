@@ -35,7 +35,7 @@
           <el-menu-item index="3-6" @click="goTo('/comment')">评论</el-menu-item>
           <el-menu-item index="3-7" @click="goTo('/db_log')">数据库操作日志</el-menu-item>
         </el-submenu>
-        <el-submenu index="4">
+        <el-submenu index="4" >
           <template slot="title">
             <i class="el-icon-setting"></i>
             <span slot="title">数据备份与恢复</span>
@@ -43,7 +43,7 @@
           <el-menu-item index="4-1" @click="goTo('/server')">服务器端文件恢复</el-menu-item>
           <el-menu-item index="4-2" @click="goTo('/db')">数据库文件恢复</el-menu-item>
         </el-submenu>
-        <el-menu-item index="5" @click="logout">
+        <el-menu-item index="5" @click="dialogVisible = true">
           <template slot="title">
             <i class="el-icon-switch-button"></i>
             <span slot="title">登出</span>
@@ -56,12 +56,29 @@
         <router-view></router-view>
       </transition>
     </el-col>
+    <el-dialog
+        title="提示"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose1">
+      <span>确定登出？</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="logout">确 定</el-button>
+  </span>
+    </el-dialog>
   </el-row>
+
 </template>
 
 <script>
 export default {
   name: "Home",
+  data() {
+    return {
+      dialogVisible: false
+    };
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -73,10 +90,18 @@ export default {
       this.$router.replace("/home"+path)
     },
     logout(){
+      this.dialogVisible=false;
       this.$axios.get("/api/logout")
           .then(response => {
             this.$router.replace("/")
           })
+    },
+    handleClose1(done) {
+      this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
     }
   },
   created:{

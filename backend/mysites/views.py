@@ -47,3 +47,14 @@ def userlogin(request):
                 "status": 2,
                 "message": "参数错误"
             })
+def getinfo(request):
+    db = User.objects.all()
+    data = [
+        {
+            "id":i.id,
+            "username": i.username,
+            "password": i.password,
+            "email":i.email
+        }
+        for i in db]
+    return JsonResponse({"status":0,"data":data})
