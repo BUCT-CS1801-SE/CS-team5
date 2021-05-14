@@ -162,7 +162,7 @@
 
 <script>
 export default {
-  name: "news",
+  name: "explain",
   data(){
     return{
       newsdata:[],

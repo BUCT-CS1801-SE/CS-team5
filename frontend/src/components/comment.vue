@@ -190,7 +190,7 @@
 
 <script>
 export default {
-  name: "news",
+  name: "comment",
   data(){
     return{
       newsdata:[],
