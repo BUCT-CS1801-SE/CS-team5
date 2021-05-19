@@ -33,7 +33,6 @@
           <el-menu-item index="3-4" @click="goTo('/news')">新闻</el-menu-item>
           <el-menu-item index="3-5" @click="goTo('/explain')">讲解</el-menu-item>
           <el-menu-item index="3-6" @click="goTo('/comment')">评论</el-menu-item>
-          <el-menu-item index="3-7" @click="goTo('/db_log')">数据库操作日志</el-menu-item>
         </el-submenu>
         <el-submenu index="4" >
           <template slot="title">
